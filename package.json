@@ -1,0 +1,30 @@
+{
+  "name": "cse341-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "swagger": "node ./swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ailenrmansilla/cse341-2.git"
+  },
+  "author": "Ailen Mansilla",
+  "license": "ISC",
+  "dependencies": {
+    "db": "^4.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongo": "^0.1.0",
+    "swagger-autogen": "^2.23.6"
+  },
+  "engines": {
+    "node": "20.6.1"
+}
+}
