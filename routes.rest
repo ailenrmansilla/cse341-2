@@ -1,0 +1,40 @@
+### Read Flavors
+GET http://localhost:8080/flavors/flavors HTTP/1.1
+### Read Toppings
+GET http://localhost:8080/toppings/toppings HTTP/1.1
+
+### Delete Flavor
+DELETE http://localhost:8080/flavors/652b604ebcbd7cfcedaa94a4 HTTP/1.1
+
+
+### POST Create flavor
+POST http://localhost:8080/flavors HTTP/1.1
+content-type: application/json 
+### send request goes below POST line
+{
+    "flavor": "Vanilla",
+    "brand" : "Blue bell",
+    "type": "ice cream",
+    "quantity" : "one pint",
+    "price" : "6.10"
+}
+
+
+### POST Create topping
+POST http://localhost:8080/toppings HTTP/1.1
+content-type: application/json 
+### content-type goes below POST line
+
+{
+    "name": "Cookie crumbs",
+    "type": "cookie"
+}
+
+### Render Flavors
+GET https://cse-341-vtdf.onrender.com/flavors HTTP/1.1
+
+### Render Toppings
+GET https://cse-341-vtdf.onrender.com/toppings HTTP/1.1
+
+### Api Docs deployed in Render
+GET https://cse-341-vtdf.onrender.com/api-docs HTTP/1.1
