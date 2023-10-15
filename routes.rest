@@ -31,10 +31,10 @@ content-type: application/json
 }
 
 ### Render Flavors
-GET https://cse-341-vtdf.onrender.com/flavors HTTP/1.1
+GET https://api-icecreamshop.onrender.com/flavors HTTP/1.1
 
 ### Render Toppings
-GET https://cse-341-vtdf.onrender.com/toppings HTTP/1.1
+GET https://api-icecreamshop.onrender.com/toppings HTTP/1.1
 
 ### Api Docs deployed in Render
-GET https://cse-341-vtdf.onrender.com/api-docs HTTP/1.1
+GET https://api-icecreamshop.onrender.com/api-docs HTTP/1.1
