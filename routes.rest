@@ -1,10 +1,10 @@
 ### Read Flavors
 GET http://localhost:8080/flavors HTTP/1.1
 ### Read Toppings
-GET http://localhost:8080/toppings/toppings HTTP/1.1
+GET http://localhost:8080/toppings HTTP/1.1
 
 ### Delete Flavor
-DELETE http://localhost:8080/flavors/652b604ebcbd7cfcedaa94a4 HTTP/1.1
+DELETE http://localhost:8080/flavors/652e9d76ccea4712fcde067f HTTP/1.1
 
 
 ### POST Create flavor
