@@ -1,5 +1,5 @@
 ### Read Flavors
-GET http://localhost:8080/flavors/flavors HTTP/1.1
+GET http://localhost:8080/flavors HTTP/1.1
 ### Read Toppings
 GET http://localhost:8080/toppings/toppings HTTP/1.1
 
@@ -10,7 +10,7 @@ DELETE http://localhost:8080/flavors/652b604ebcbd7cfcedaa94a4 HTTP/1.1
 ### POST Create flavor
 POST http://localhost:8080/flavors HTTP/1.1
 content-type: application/json 
-### send request goes below POST line
+
 {
     "flavor": "Vanilla",
     "brand" : "Blue bell",
@@ -30,11 +30,12 @@ content-type: application/json
     "type": "cookie"
 }
 
+
 ### Render Flavors
-GET https://api-icecreamshop.onrender.com/flavors HTTP/1.1
+GET http://api-icecreamshop.onrender.com/flavors HTTP/1.1
 
 ### Render Toppings
-GET https://api-icecreamshop.onrender.com/toppings HTTP/1.1
+GET http://api-icecreamshop.onrender.com/toppings HTTP/1.1
 
 ### Api Docs deployed in Render
-GET https://api-icecreamshop.onrender.com/api-docs HTTP/1.1
+GET http://api-icecreamshop.onrender.com/api-docs HTTP/1.1

@@ -25,6 +25,7 @@
     "mongo": "^0.1.0",
     "nodemon": "^3.0.1",
     "nodmeon": "^0.0.1-security",
+    "swagger": "^0.7.5",
     "swagger-ui-express": "^5.0.0"
   },
   "engines": {

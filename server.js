@@ -7,20 +7,16 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 
-//Not sure about the next blocks
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 app
-  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-  .use(cors())
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use('/', require('./routes'));
-
-
-
-app.use(bodyParser.json()) //middleware,responsible for parsing the incoming request bodies before you handle it
+    .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+    .use(cors())
+    .use(express.json())
+    .use(express.urlencoded({ extended: true }))
+    .use(bodyParser.json()) //middleware,responsible for parsing the incoming request bodies before you handle it
     .use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*'); // what type of data the client, user, or request server wants in the response
         next(); // Pass control to the next matching route/handler/middleware

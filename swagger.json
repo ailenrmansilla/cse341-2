@@ -21,7 +21,7 @@
         }
       }
     },
-    "/contacts/": {
+    "/flavors/": {
       "get": {
         "description": "",
         "produces": [
@@ -71,7 +71,7 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/flavors/{id}": {
       "get": {
         "description": "",
         "produces": [
