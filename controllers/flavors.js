@@ -64,6 +64,7 @@ const updateFlavor = async (req, res) => {
 // DELETE one FLAVOR
 const deleteFlavor = async (req, res) => {
     const flavorId = new ObjectId(req.params.id);
+    // error:  'remove' is not function
     const response = await mongodb
         .getDb()
         .db('iceCreamShop')

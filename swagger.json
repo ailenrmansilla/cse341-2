@@ -23,7 +23,7 @@
     },
     "/flavors/": {
       "get": {
-        "description": "",
+        "description": "get all flavors",
         "produces": [
           "application/json"
         ],
@@ -34,7 +34,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "add new flavor",
         "parameters": [
           {
             "name": "body",
@@ -42,20 +42,61 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
+                "flavor": {
+                  "example": "Vanilla"
                 },
-                "lastName": {
-                  "example": "any"
+                "brand": {
+                  "example": "Blue bell"
                 },
-                "email": {
-                  "example": "any"
+                "type": {
+                  "example": "ice cream"
                 },
-                "favoriteColor": {
-                  "example": "any"
+                "quantity": {
+                  "example": "half gallon"
                 },
-                "birthday": {
-                  "example": "any"
+                "price": {
+                  "example": "6.10"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/toppings/": {
+      "get": {
+        "description": "get all toppings",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "add new flavor",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Cookie crumbs"
+                },
+                "type": {
+                  "example": "cookie"
                 }
               }
             }
@@ -92,7 +133,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Updates one flavor",
         "parameters": [
           {
             "name": "id",
@@ -106,20 +147,20 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
+                "flavor": {
+                  "example": "Vanilla"
                 },
-                "lastName": {
-                  "example": "any"
+                "brand": {
+                  "example": "Blue bell"
                 },
-                "email": {
-                  "example": "any"
+                "type": {
+                  "example": "ice cream"
                 },
-                "favoriteColor": {
-                  "example": "any"
+                "quantity": {
+                  "example": "half gallon"
                 },
-                "birthday": {
-                  "example": "any"
+                "price": {
+                  "example": "6.10"
                 }
               }
             }
@@ -135,7 +176,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "deletes one flavor",
         "parameters": [
           {
             "name": "id",
@@ -153,6 +194,82 @@
           }
         }
       }
-    }
+    },
+      "/toppings/{id}": {
+        "get": {
+          "description": "get topping by id",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "put": {
+          "description": "Updates one topping",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "cookie crumbs"
+                  },
+                  "type": {
+                    "example": "cookie"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        },
+        "delete": {
+          "description": "deletes one topping",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
   }
+
+
 }
