@@ -11,26 +11,23 @@ const { ToppingValidationRules, validate } = require('../validation/validate');
 // is it necessary to use try catch?
 
 // GET all TOPPINGS
-const getAllToppings = (req, res) => {
-    mongodb
-        .getDb()
-        .db('iceCreamShop')
-        .collection('toppings')
-        .find()
-        .toArray((err, lists) => {
-            if (err){
-                res.status(404).send({ message: err});
-            }
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(lists);
-        });
+const getAllToppings = async (req, res) =>{
+    const result = await mongodb.getDb().db('iceCreamShop').collection('toppings').find();
+    if (!result) {
+        res.status(404).send({ message: 'Collection not found'});
+        return;
+    } else{
+    result.toArray().then((lists) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(lists);
+    }); }
 };
 
 //GET one TOPPING
 const getSingleTopping = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
         res.status(400).json('Must use a valid Topping Id to find a topping.');
-      }
+    }
    const toppingId = new ObjectId(req.params.id);
     const result = await mongodb.getDb().db('iceCreamShop').collection('toppings').find({ _id: toppingId });
     result.toArray().then((lists) => {
@@ -43,19 +40,16 @@ const getSingleTopping = async (req, res) => {
 };
 
 //CREATE one Topping
-// Validation function added here
-// Does it has to be "/toppings" ?
-const createTopping =('/toppings', ToppingValidationRules, validate, async (req, res, next) => {
-    // Do I need try and catch anyway?
+const createTopping =(ToppingValidationRules, validate, async (req, res, next) => {
     try{
         const errors = validationResult(req);
-        // if there is error then return Error
+        // if there is an error then return Error
         if (!errors.isEmpty()) {
             return res.status(400).json({
             success: false,
             errors: errors.array(),
             });
-            }
+        }
         
         // save data in DB
         const topping = {
@@ -76,7 +70,7 @@ const createTopping =('/toppings', ToppingValidationRules, validate, async (req,
 });
 
 // UPDATE one TOPPING
-const updateTopping = async (req, res) => {
+const updateTopping = (ToppingValidationRules, validate, async (req, res) => {
     try{
         const toppingId = new ObjectId(req.params.id);
         if (!toppingId){
@@ -102,17 +96,14 @@ const updateTopping = async (req, res) => {
     } catch(err) {
         res.status(500).json(err);
         }
-};
+});
 
 // DELETE one TOPPING
 const deleteTopping = async (req, res) => {
     try{
         const toppingId = new ObjectId(req.params.id);
-        const response = await mongodb
-            .getDb()
-            .db('iceCreamShop')
-            .collection('toppings')
-            .remove({ _id: toppingId }, true);
+        // Error: "This is not a function"
+        const response = await mongodb.getDb().db('iceCreamShop').collection('toppings').deleteOne({ _id: toppingId });
         console.log(response);
         if (response.deletedCount > 0) {
             res.status(204).send();

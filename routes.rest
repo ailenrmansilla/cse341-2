@@ -1,11 +1,17 @@
 ### Read Flavors
 GET http://localhost:8080/flavors HTTP/1.1
+
 ### Read Toppings
 GET http://localhost:8080/toppings HTTP/1.1
 
-### Delete Flavor
-DELETE http://localhost:8080/flavors/652e9d76ccea4712fcde067f HTTP/1.1
+### GET One topping
+GET http://localhost:8080/toppings/65392c00eafb9a87e73a6d13 HTTP/1.1
 
+### Delete Flavor
+DELETE http://localhost:8080/flavors/65397bc97f292433fef28790 HTTP/1.1
+
+### Delete Topping
+DELETE http://localhost:8080/toppings/65397bb77f292433fef2878f HTTP/1.1
 
 ### POST Create flavor
 POST http://localhost:8080/flavors HTTP/1.1
@@ -23,11 +29,10 @@ content-type: application/json
 ### POST Create topping
 POST http://localhost:8080/toppings HTTP/1.1
 content-type: application/json 
-### content-type goes below POST line
 
 {
-    "name": "Cookie crumbs",
-    "type": "cookie"
+    "name": "Dulce de Leche",
+    "type": "sauce"
 }
 
 
