@@ -1,5 +1,9 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
+//express validator
+const { validationResult } = require("express-validator");
+//validator
+const { FlavorValidationRules, validate } = require('../validation/validate');
 
 // GET all FLAVORS
 const getAllFlavors = async (req, res) => {
@@ -21,7 +25,7 @@ const getSingleFlavor = async (req, res) => {
 };
 
 //CREATE one Flavor
-const createFlavor = async (req, res) => {
+const createFlavor = ('/toppings', FlavorValidationRules, validate, async (req, res) => {
     const flavor = {
         flavor: req.body.flavor,
         brand: req.body.brand,
@@ -35,7 +39,7 @@ const createFlavor = async (req, res) => {
     } else {
         res.status(500).json(response.error || 'Some error occurred while creating the contact.');
     }
-};
+});
 
 // UPDATE one FLAVOR
 const updateFlavor = async (req, res) => {
