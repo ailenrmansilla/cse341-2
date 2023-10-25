@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const userDataValidate = require("../validation/validate");
 
 //routes
 router.use('/', require('./swagger'));
