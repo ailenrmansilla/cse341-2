@@ -1,3 +1,4 @@
+try{
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 //express validator
@@ -122,3 +123,4 @@ module.exports = {
     updateTopping,
     deleteTopping
 };
+} catch{ res.status(500).json(err);}
