@@ -7,7 +7,28 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 
+// new stuff for oauth2.0
+// const passport = require('passport');
+// const session = require('express-session');
+// session
+// app.use(session({
+//     secret: 'icecream',
+//     resave: false,
+//     saveUninitialized: false
+// }))
 
+// passport
+// require('./passport/passport')(passport)
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// // Set global var
+// app.use(function (req, res, next) {
+//     res.locals.user = req.user || null
+//     next()
+//   })
+
+// swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -23,9 +44,10 @@ app
         // Do not expect the second middleware function to get invoked automatically.
     })
     .use('/', require('./routes')); // app.METHOD(PATH, HANDLER/middleware function) where PATH is a path on the server
-// and HANDLER is the function executed when the route is matched
-// A route is a section of EXPRESS code that associates an HTTP verb ( GET , POST , PUT , DELETE , etc.),
-// a URL path/pattern, and a function that is called to handle that pattern.
+
+// app.use auth 
+// app.use('/auth', require('./routes/auth'));
+
 
 mongodb.initDb((err) => {
     if (err) {
