@@ -7,27 +7,9 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
-
 // swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-
-// check jwt
-const authCheck = jwt({
-    secret: jwksRsa.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: 'https://dev-hi15wy7wyw0317gp.us.auth0.com/.well-known/jwks.json',
-    }),
-    audience: 'http://localhost:8080', // API Audience
-    issuer: 'https://dev-hi15wy7wyw0317gp.us.auth0.com/', // auth0 Domain
-    algorithms: ['RS256'],
-  });
-  
-app.use(authCheck);
 
 app
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
@@ -41,9 +23,6 @@ app
         // Do not expect the second middleware function to get invoked automatically.
     })
     .use('/', require('./routes')); // app.METHOD(PATH, HANDLER/middleware function) where PATH is a path on the server
-
-// app.use auth 
-// app.use('/auth', require('./routes/auth'));
 
 
 mongodb.initDb((err) => {

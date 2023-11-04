@@ -6,7 +6,7 @@ require('dotenv').config();
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.AUTH0_CLIENT_SECRET,
   baseURL: process.env.BASE_URL,
   clientID: process.env.AUTH0_CLIENT_ID,
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
@@ -19,7 +19,7 @@ router.get('/checkLoginStatus', (req,res)=>{
 });
 
 // Secured route
-app.get('/profile', (req, res) => {
+router.get('/profile', (req, res) => {
   // Requires authentication
   if (!req.oidc.isAuthenticated()) {
     return res.status(401).send('Not logged in');
