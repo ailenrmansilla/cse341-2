@@ -7,30 +7,27 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 
-// new stuff for oauth2.0
-// const passport = require('passport');
-// const session = require('express-session');
-// session
-// app.use(session({
-//     secret: 'icecream',
-//     resave: false,
-//     saveUninitialized: false
-// }))
-
-// passport
-// require('./passport/passport')(passport)
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// // Set global var
-// app.use(function (req, res, next) {
-//     res.locals.user = req.user || null
-//     next()
-//   })
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 
 // swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+
+// check jwt
+const authCheck = jwt({
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: 'https://dev-hi15wy7wyw0317gp.us.auth0.com/.well-known/jwks.json',
+    }),
+    audience: 'http://localhost:8080', // API Audience
+    issuer: 'https://dev-hi15wy7wyw0317gp.us.auth0.com/', // auth0 Domain
+    algorithms: ['RS256'],
+  });
+  
+app.use(authCheck);
 
 app
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

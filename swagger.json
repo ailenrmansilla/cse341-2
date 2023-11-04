@@ -268,6 +268,24 @@
             }
           }
         }
+      },
+      "/login": {
+        "get": {
+          "summary": "Initiates the login process with Auth0.",
+          "description": "This endpoint redirects the user to Auth0 for authentication."
+        }
+      },
+      "/logout": {
+        "get": {
+          "summary": "Logs the user out from your application.",
+          "description": "This endpoint initiates the logout process and redirects the user back to your application."
+        }
+      },
+      "/callback": {
+        "get": {
+          "summary": "Callback endpoint for Auth0 authentication.",
+          "description": "This endpoint receives the response from Auth0 after authentication and processes it."
+        }
       }
   }
 

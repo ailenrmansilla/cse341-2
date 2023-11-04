@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = require('express-openid-connect');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 
 const config = {
   authRequired: false,
@@ -18,6 +17,16 @@ router.use(auth(config));
 router.get('/checkLoginStatus', (req,res)=>{
   res.send(req.oidc.isAuthenticated() ? 'Logged in': 'Logged out');
 });
+
+// Secured route
+app.get('/profile', (req, res) => {
+  // Requires authentication
+  if (!req.oidc.isAuthenticated()) {
+    return res.status(401).send('Not logged in');
+  }
+  res.send(JSON.stringify(req.oidc.user));
+});
+
 
 //routes
 router.use('/', require('./swagger'));
