@@ -7,6 +7,13 @@ const { FlavorValidationRules, validate } = require('../validation/validate');
 
 // GET all FLAVORS
 const getAllFlavors = async (req, res) => {
+    if (req.user) {
+        const user = req.user; // This is the JWT payload
+        const userId = user.sub; // Accessing a specific claim (e.g., 'sub' claim for the user ID)
+        res.json({ message: `Authenticated user with ID ${userId}` });
+    } else {
+        res.status(401).json({ message: 'Unauthorized. Token is missing or invalid.' });
+    }
     const result = await mongodb.getDb().db('iceCreamShop').collection('flavors').find();
     if (!result) {
         res.status(404).send({ message: 'Collection not found'});

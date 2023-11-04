@@ -7,9 +7,14 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 
+const jwtMiddleware = require('./middleware/authCheck');
+
 // swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+
+// app.use(jwtMiddleware); 
+//After defining the express-jwt middleware, apply it using app.use() to your Express application instance. This ensures that it processes requests for any routes defined after this point.
 
 app
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
