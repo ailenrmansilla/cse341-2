@@ -21,7 +21,7 @@
         }
       }
     },
-    "/flavors/": {
+    "/flavors/api/private": {
       "get": {
         "description": "get all flavors",
         "produces": [

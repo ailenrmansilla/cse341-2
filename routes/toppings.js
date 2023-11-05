@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkJwt = require('../middleware/authCheck');
 
 const iceCreamShopController = require('../controllers/toppings');
 

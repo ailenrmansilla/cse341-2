@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const jwtMiddleware = require('../middleware/authCheck');
+const checkJwt = require('../middleware/authCheck');
 
 const iceCreamShopController = require('../controllers/flavors');
 
-router.get('/protected', jwtMiddleware, iceCreamShopController.getAllFlavors); // HTTP verb, URL path/pattern, function called to handle that pattern
+router.get('/api/private', checkJwt, iceCreamShopController.getAllFlavors); // HTTP verb, URL path/pattern, function called to handle that pattern
 router.get('/:id', iceCreamShopController.getSingleFlavor); // /:id = path/pattern  (the req in the getSinlge function)
 router.post('/', iceCreamShopController.createFlavor);
 router.put('/:id', iceCreamShopController.updateFlavor);

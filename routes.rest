@@ -2,7 +2,7 @@
 GET  http://localhost:8080/login HTTP/1.1
 
 ### Read Flavors
-GET http://localhost:8080/flavors HTTP/1.1
+GET http://localhost:8080/flavors/api/private HTTP/1.1
 
 ### Read Toppings
 GET http://localhost:8080/toppings HTTP/1.1
