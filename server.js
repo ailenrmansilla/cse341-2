@@ -6,14 +6,31 @@ const cors = require('cors');
 const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
+// const { auth } = require('express-oauth2-jwt-bearer');
 // const jwtMiddleware = require('./middleware/authCheck');
-
 // swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-// app.use(jwtMiddleware); 
+// app.use(checkJwt); 
 //After defining the express-jwt middleware, apply it using app.use() to your Express application instance. This ensures that it processes requests for any routes defined after this point.
+
+//
+
+// const jwtCheck = auth({
+//   audience: 'http://ice_cream_shop.com',
+//   issuerBaseURL: 'https://dev-hi15wy7wyw0317gp.us.auth0.com/',
+//   tokenSigningAlg: 'RS256'
+// });
+
+// enforce on all endpoints
+// app.use(jwtCheck);
+
+// app.get('/authorized', function (req, res) {
+//     res.send('Secured Resource');
+// });
+
+//
 
 app
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

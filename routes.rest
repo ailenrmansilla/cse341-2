@@ -2,7 +2,12 @@
 GET  http://localhost:8080/login HTTP/1.1
 
 ### Read Flavors
-GET http://localhost:8080/flavors/api/private HTTP/1.1
+GET http://localhost:8080/flavors HTTP/1.1
+
+### Secured Read All Flavors
+GET http://localhost:8080/flavors HTTP/1.1
+Host: https://dev-hi15wy7wyw0317gp.us.auth0.com
+Authorization: Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9kZXYtaGkxNXd5N3d5dzAzMTdncC51cy5hdXRoMC5jb20vIn0..SGH498YlmM0t8iTB.D48xo0MVl3fX5VX2f1Y4MPMVR0iMUx4Dju6uNm1sJad-AjQMcQQFZNkcZl6eNO_UnyOgIX0LqVPlNn9kPIO21yAziVYrc9ZOIFglRphiDeWoqOvc-DSbHzx-pgnifZOxQp9bw8FhgoK_LakYcgCOZ2l3wf-h96Qg25UtM1fMhEwm_6HcYGnXtpuK_JiTGtNMbPxEXgyv16Zye3jPNn72bsJMzRrU8marsJIgAMEp7kLrTRRDj3INFRZTCT4ujODbslPTI-PsN2CEJLOOp4hfOy770SCpxubHu8oJ_xkLae4ksmxflT9HsCv0ENwjgJk0cOkZneZ5hCcVCW0gZrQJSVg2i8j1_R4.eM2xNWZlLF_1EnOsTfJZaA
 
 ### Read Toppings
 GET http://localhost:8080/toppings HTTP/1.1

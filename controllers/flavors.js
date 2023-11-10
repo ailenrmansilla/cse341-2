@@ -7,6 +7,31 @@ const { FlavorValidationRules, validate } = require('../validation/validate');
 
 // GET all FLAVORS
 const getAllFlavors = async (req, res) => {
+    // Check for the presence of the user in the request
+    if (req.user) {
+        const user = req.user; // This is the JWT payload
+        const userId = user.sub; // Accessing a specific claim (e.g., 'sub' claim for the user ID)
+        console.log(`Authenticated user with ID ${userId}`);
+    } else {
+        // If no user is found, send an unauthorized response and return
+        return res.status(401).json({ message: 'Unauthorized. Token is missing or invalid.' });
+    }
+
+    // If the code reaches this point, it means the user is authenticated
+    // Continue with the MongoDB query
+    const result = await mongodb.getDb().db('iceCreamShop').collection('flavors').find();
+
+    if (!result) {
+        // Send a 404 response if the collection is not found
+        return res.status(404).send({ message: 'Collection not found' });
+    } else {
+        // Send the result as JSON if the collection is found
+        result.toArray().then((lists) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(lists);
+        });
+    }
+};
     // if (req.user) {
     //     const user = req.user; // This is the JWT payload
     //     const userId = user.sub; // Accessing a specific claim (e.g., 'sub' claim for the user ID)
@@ -14,16 +39,15 @@ const getAllFlavors = async (req, res) => {
     // } else {
     //     res.status(401).json({ message: 'Unauthorized. Token is missing or invalid.' });
     // }
-    const result = await mongodb.getDb().db('iceCreamShop').collection('flavors').find();
-    if (!result) {
-        res.status(404).send({ message: 'Collection not found'});
-        return;
-    } else {
-        result.toArray().then((lists) => {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(lists);
-    }); }
-};
+    // const result = await mongodb.getDb().db('iceCreamShop').collection('flavors').find();
+    // if (!result) {
+    //     res.status(404).send({ message: 'Collection not found'});
+    //     return;
+    // } else {
+    //     result.toArray().then((lists) => {
+    //         res.setHeader('Content-Type', 'application/json');
+    //         res.status(200).json(lists);
+    // }); }
 
 //GET one FLAVOR
 const getSingleFlavor = async (req, res) => {

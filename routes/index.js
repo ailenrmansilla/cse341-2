@@ -1,24 +1,41 @@
 const express = require('express');
-const router = express.Router();
 const { auth } = require('express-openid-connect');
 require('dotenv').config();
 
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: process.env.AUTH0_CLIENT_SECRET,
+  clientSecret: process.env.AUTH0_CLIENT_SECRET,
   baseURL: process.env.BASE_URL,
   clientID: process.env.AUTH0_CLIENT_ID,
-  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+  //
+  idpLogout: true,
+  authorizationParams: {
+    response_type: 'code id_token', // Ensure 'id_token' is included if needed
+    audience: 'http://ice_cream_shop.com',
+  },
 };
+
+
+const router = express.Router();
 
 // auth0 router attaches /login, /logout, and /callback routes
 router.use(auth(config));
-router.get('/checkLoginStatus', (req,res)=>{
-  res.send(req.oidc.isAuthenticated() ? 'Logged in': 'Logged out');
+// req.isAuthenticated is provided from the auth router
+router.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
+// router.get('/checkLoginStatus', (req,res)=>{
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in': 'Logged out');
+// });
+
 
 // Secured route
+// router.get('/profile', auth(config), (req, res) => {
+//   res.send(JSON.stringify(req.oidc.user));
+// });
+
 router.get('/profile', (req, res) => {
   // Requires authentication
   if (!req.oidc.isAuthenticated()) {
@@ -26,6 +43,7 @@ router.get('/profile', (req, res) => {
   }
   res.send(JSON.stringify(req.oidc.user));
 });
+
 
 
 //routes
