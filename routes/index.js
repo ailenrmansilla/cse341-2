@@ -5,16 +5,11 @@ require('dotenv').config();
 const config = {
   authRequired: false,
   auth0Logout: true,
-  clientSecret: process.env.AUTH0_CLIENT_SECRET,
+  secret: process.env.AUTH0_CLIENT_SECRET,
   baseURL: process.env.BASE_URL,
   clientID: process.env.AUTH0_CLIENT_ID,
-  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-  //
-  idpLogout: true,
-  authorizationParams: {
-    response_type: 'code id_token', // Ensure 'id_token' is included if needed
-    audience: 'http://ice_cream_shop.com',
-  },
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
+  
 };
 
 
